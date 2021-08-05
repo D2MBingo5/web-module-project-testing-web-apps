@@ -19,17 +19,32 @@ test('renders without errors', ()=>{
 test('renders the contact form header', ()=> {
     render(<App />)
 
-    const h1contact = screen.queryByText('Contact Form')
+    const h1contact = screen.queryByText(/contact form/i)
     
     expect(h1contact).toBeInTheDocument();
     expect(h1contact).toBeTruthy();
-    expect(h1contact).toHaveTextContent('Contact Form');
+    expect(h1contact).toHaveTextContent(/contact form/i);
 
     // console.log(h1contact)
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
-    
+    render(<App />)
+
+    const firstNameInput = screen.getByLabelText(/First Name*/i)
+    // console.log(firstNameInput)
+    userEvent.type(firstNameInput, '1234')
+
+    const err = screen.getByTestId(/error/i)
+
+    expect(err).toBeInTheDocument();
+    // console.log(err)
+
+    userEvent.type(firstNameInput, '5')
+    // console.log(firstNameInput)
+
+    expect(err).not.toBeInTheDocument();
+    // console.log(firstNameInput)
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
