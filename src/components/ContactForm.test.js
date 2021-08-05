@@ -4,12 +4,28 @@ import userEvent from '@testing-library/user-event';
 
 import ContactForm from './ContactForm';
 
+import * as rtl from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+
+import App from '../App'
+
 test('renders without errors', ()=>{
-    
+    const renderApp = rtl.render(
+        <App />
+    )
+    // console.log(renderApp.debug())
 });
 
 test('renders the contact form header', ()=> {
-    
+    const renderApp = rtl.render(
+        <App />
+    )
+    const h1contact = renderApp.queryByText('Contact Form')
+    expect(h1contact).toBeInTheDocument();
+    expect(h1contact).toBeTruthy();
+    expect(h1contact).toHaveTextContent('Contact Form');
+
+    // console.log(h1contact)
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
