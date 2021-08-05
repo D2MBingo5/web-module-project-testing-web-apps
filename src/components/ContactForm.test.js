@@ -75,7 +75,19 @@ test('renders ONE error message if user enters a valid first name and last name 
 });
 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
-    
+    render(<App />)
+
+    const emailInput = screen.getByLabelText(/Email*/i)    
+
+    userEvent.type(emailInput, 'rerere')
+
+    const err = screen.getByTestId(/error/i)
+    console.log(err)
+    console.log(err.textContent)
+
+    expect(err).toBeInTheDocument()
+    // I do not know how to target the text content despite being able to display it
+
 });
 
 test('renders "lastName is a required field" if an last name is not entered and the submit button is clicked', async () => {
