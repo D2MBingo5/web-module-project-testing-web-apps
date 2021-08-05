@@ -17,10 +17,10 @@ test('renders without errors', ()=>{
 });
 
 test('renders the contact form header', ()=> {
-    const renderApp = rtl.render(
-        <App />
-    )
-    const h1contact = renderApp.queryByText('Contact Form')
+    render(<App />)
+
+    const h1contact = screen.queryByText('Contact Form')
+    
     expect(h1contact).toBeInTheDocument();
     expect(h1contact).toBeTruthy();
     expect(h1contact).toHaveTextContent('Contact Form');
