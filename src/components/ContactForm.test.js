@@ -48,6 +48,14 @@ test('renders ONE error message if user enters less then 5 characters into first
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
+    render(<App />)
+
+    const submitBtn = screen.getByRole('button')
+    // console.log(submitBtn)
+
+    userEvent.click(submitBtn)
+
+    expect(screen.queryAllByTestId('error')).toHaveLength(3)
     
 });
 
