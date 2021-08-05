@@ -130,5 +130,23 @@ test('renders all firstName, lastName and email text when submitted. Does NOT re
 });
 
 test('renders all fields text when all fields are submitted.', async () => {
+    render(<App />)
+
+    const firstNameInput = screen.getByLabelText(/First Name*/i)
+    const lastNameInput = screen.getByLabelText(/Last Name*/i)
+    const emailInput = screen.getByLabelText(/Email*/i)
+    const messageInput = screen.getByLabelText(/message/i)
+    const submitBtn = screen.getByRole('button')
+
+    userEvent.type(firstNameInput, '12345')
+    userEvent.type(lastNameInput, '12345')
+    userEvent.type(emailInput, 'rea@g.com')
+    userEvent.type(messageInput, '123456789')
+    userEvent.click(submitBtn)
+
+    expect(screen.queryByTestId(/firstnamedisplay/i)).toBeInTheDocument()
+    expect(screen.queryByTestId(/lastnamedisplay/i)).toBeInTheDocument()
+    expect(screen.queryByTestId(/emaildisplay/i)).toBeInTheDocument()
+    expect(screen.queryByTestId(/messagedisplay/i)).toBeInTheDocument()
     
 });
